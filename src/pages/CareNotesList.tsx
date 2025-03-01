@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ErrorBoundary from '../hoc/withErrorBoundary';
 const CareNotesList: React.FC = () => {
   const notes: any = [
     {
@@ -26,4 +26,4 @@ const CareNotesList: React.FC = () => {
   );
 };
 
-export default CareNotesList;
+export default ErrorBoundary(CareNotesList);
