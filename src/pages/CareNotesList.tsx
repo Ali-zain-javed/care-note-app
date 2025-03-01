@@ -21,7 +21,7 @@ const CareNotesList: React.FC = () => {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto mt-6 p-4 border rounded shadow-lg bg-gray-200">
+      <div className="max-w-5xl mx-auto mt-6 p-4 border rounded shadow-lg bg-gray-200 mt-12">
         <h2 className="text-xl font-semibold mb-4">Care Notes</h2>
         <CreateCareNotesScreen />
         {error && <div className="text-red-500 mb-2">{error}</div>}
