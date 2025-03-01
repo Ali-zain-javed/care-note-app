@@ -11,6 +11,7 @@
     "@types/jest": "^27.5.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "axios": "^1.8.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "fs": "^0.0.1-security",
