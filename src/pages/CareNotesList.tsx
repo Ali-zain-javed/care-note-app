@@ -3,22 +3,11 @@ import ErrorBoundary from '../hoc/withErrorBoundary';
 import { loadCareNotes } from '../redux/notesSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
+import moment from 'moment';
 
 const CareNotesList: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { notes, error } = useSelector((state: RootState) => state.notes);
-  console.log('notes:', notes);
-  console.log('error:', error);
-  const notesL: any = [
-    {
-      id: 1,
-      residentName: 'John Doe',
-    },
-    {
-      id: 2,
-      residentName: 'Jane Doe',
-    },
-  ];
 
   useEffect(() => {
     const fetchNotes = () => {
@@ -29,12 +18,18 @@ const CareNotesList: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Care Notes</h2>
+    <div className="max-w-5xl mx-auto mt-6 p-4 border rounded shadow-lg bg-gray-200">
+      <h2 className="text-xl font-semibold mb-4">Care Notes</h2>
+      {error && <div className="text-red-500 mb-2">{error}</div>}
       <ul>
-        {notesL?.map((note: any) => (
-          <li key={note?.id} className="border p-2 mb-2 rounded">
-            <strong>{note?.residentName}</strong>
+        {notes?.map((note) => (
+          <li key={note?.id} className="border p-3 mb-3 rounded bg-white shadow">
+            <strong className="block text-lg font-bold">{note?.residentName}</strong>
+            <span className="text-gray-500 text-sm">
+              {note?.dateTime ? moment(note?.dateTime).format('YYYY-MM-DD hh:mm A') : ''} -{' '}
+              {note?.authorName}
+            </span>
+            <p className="mt-1 text-gray-600 font-bold">{note?.content}</p>
           </li>
         ))}
       </ul>
