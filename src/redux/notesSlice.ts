@@ -1,6 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState: any = {
+interface Note {
+  id: number;
+  residentName: string;
+  dateTime: string;
+  content: string;
+  authorName: string;
+}
+
+interface NotesState {
+  notes: Note[];
+}
+
+const initialState: NotesState = {
   notes: [],
 };
 
