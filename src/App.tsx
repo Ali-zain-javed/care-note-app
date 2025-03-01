@@ -1,10 +1,12 @@
 import React, { lazy, Suspense } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 import CareNotesList from './pages/CareNotesList';
 function App() {
   return (
-    <div className="App">
+    <Provider store={store}>
       <Router>
         <Routes>
           <Route
@@ -17,7 +19,7 @@ function App() {
           />
         </Routes>
       </Router>
-    </div>
+    </Provider>
   );
 }
 

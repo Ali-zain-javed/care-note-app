@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ErrorBoundary from '../hoc/withErrorBoundary';
 const CareNotesList: React.FC = () => {
   const notes: any = [
