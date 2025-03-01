@@ -7,12 +7,21 @@ import TextArea from '../components/TextArea';
 const CreateCareNotesScreen: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({ residentName: '', authorName: '', content: '' });
+  const [errors, setErrors] = useState({ residentName: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    if (errors.residentName && e.target.name === 'residentName') {
+      setErrors({ residentName: '' });
+    }
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
+    if (!formData.residentName.trim()) {
+      setErrors({ residentName: 'Resident Name is required.' });
+      return;
+    }
+
     console.log(formData);
     setIsModalOpen(false);
   };
@@ -28,11 +37,14 @@ const CreateCareNotesScreen: React.FC = () => {
           <div className="p-4 bg-white">
             <label className="block mb-2 font-semibold">Resident Name:</label>
             <Input
+              required={true}
               name="residentName"
               onChange={handleChange}
-              className="border border-black p-2 w-full mb-4"
+              className="border border-black p-2 w-full mb-4 "
             />
-
+            {errors.residentName && (
+              <p className="text-red-500 text-sm mb-4 mt-[-8px]">{errors.residentName}</p>
+            )}
             <label className="block mb-2 font-semibold">Author Name:</label>
             <Input
               name="authorName"

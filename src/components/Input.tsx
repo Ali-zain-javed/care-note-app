@@ -7,6 +7,7 @@ type InputProps = {
   placeholder?: string;
   className?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  required?: boolean;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -16,6 +17,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   className = '',
   onChange,
+  required = false,
 }) => {
   return (
     <input
@@ -25,6 +27,7 @@ const Input: React.FC<InputProps> = ({
       placeholder={placeholder}
       className={`border p-2 rounded ${className}`}
       onChange={onChange}
+      required={true}
     />
   );
 };
