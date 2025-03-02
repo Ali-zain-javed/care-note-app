@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchCareNotes } from '../services/api';
+import { fetchCareNotes, addCareNote } from '../services/api';
 
 export interface Note {
-  id: number;
+  id?: number;
   residentName: string;
   dateTime: string;
   content: string;
@@ -28,6 +28,19 @@ export const loadCareNotes = createAsyncThunk(
       return notes;
     } catch (error) {
       return rejectWithValue('Failed to fetch notes. Using offline data.');
+    }
+  },
+);
+
+// added createCareNote action
+export const createCareNote = createAsyncThunk(
+  'notes/createCareNote',
+  async (note: Omit<Note, 'id'>, { rejectWithValue }) => {
+    try {
+      const newNote = await addCareNote(note);
+      return newNote;
+    } catch (error) {
+      return rejectWithValue('Failed to add note. Please try again later.');
     }
   },
 );
