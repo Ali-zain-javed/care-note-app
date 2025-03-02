@@ -65,6 +65,7 @@ const notesSlice = createSlice({
       })
       .addCase(createCareNote.fulfilled, (state, action) => {
         state.notes.unshift(action.payload);
+        if (state.notes.length > 5) state.notes.pop();
         state.error = null;
       })
       .addCase(createCareNote.rejected, (state, action) => {

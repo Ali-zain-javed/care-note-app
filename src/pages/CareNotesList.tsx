@@ -5,21 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import CreateCareNotesScreen from './CareNotesScreen';
 import { ToastContainer } from 'react-toastify';
+import usePolling from '../hooks/usePolling';
 import 'react-toastify/dist/ReactToastify.css';
 
 import moment from 'moment';
 
 const CareNotesList: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
   const { notes, error } = useSelector((state: RootState) => state.notes);
 
-  useEffect(() => {
-    const fetchNotes = () => {
-      dispatch(loadCareNotes());
-    };
-
-    fetchNotes();
-  }, []);
+  usePolling();
 
   return (
     <>
