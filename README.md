@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# Care Notes App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a **React-based Care Notes application** with offline-first support using **PouchDB**, a mock backend with **Express.js**, and global state management using **Redux Toolkit**. The app allows users to create, save, and retrieve care notes, even when offline.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Offline-first architecture** (PouchDB stores notes locally when offline)
+- **Redux Toolkit** for global state management
+- **Express.js backend** (Mock API using a JSON file)
+- **Auto-sync every 60 seconds** (fetches new notes from the backend)
+- **Error handling** for API failures, and toast for error showing
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 📌 **Setup & Installation**
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 1️⃣ **Clone the Repository**
 
-### `npm test`
+```sh
+ git clone https://github.com/Ali-zain-javed/care-note-app.git
+ cd care-note-app
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 2️⃣ **Install Dependencies**
 
-### `npm run build`
+Run the following command inside the project directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+ npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Or if using Yarn:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+ yarn install
+```
 
-### `npm run eject`
+### 3️⃣ **Start the Backend Server**
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```sh
+ cd backend
+ npm install
+ cd ts-node server.ts
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+OR
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```sh
+yarn ts-node backend/server.ts   # Runs Node app at http://localhost:3001
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### 4️⃣ **Start the Frontend Application**
 
-## Learn More
+```sh
+ yarn start   # Runs React app at http://localhost:3000
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📌 **Assumptions & Design Decisions**
+
+- **PouchDB is only used in the frontend** for offline support.
+- **Redux only stores the last 5 notes** (most recent ones).
+- **Data syncs every 60 seconds** to ensure the latest notes are available.
+- **Backend is mock-based** (uses a JSON file instead of a real database).
+
+---
+
+## 📌 **Possible Improvements**
+
+🔹 **Real Database Integration** → Use MongoDB or PostgreSQL instead of a mock JSON file.
+🔹 **UI/UX Enhancements** → Improve design and accessibility.
+🔹 **Push Notifications** → Notify users when new notes are available.
