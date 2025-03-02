@@ -3,10 +3,19 @@ import Button from '../components/Button';
 import Modal from '../components/Modal';
 import Input from '../components/Input';
 import TextArea from '../components/TextArea';
+import { createCareNote, Note } from '../redux/notesSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../redux/store';
 
 const CreateCareNotesScreen: React.FC = () => {
+  const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({ residentName: '', authorName: '', content: '' });
+  const [formData, setFormData] = useState<Note>({
+    residentName: '',
+    authorName: '',
+    content: '',
+    dateTime: new Date().toISOString(),
+  });
   const [errors, setErrors] = useState({ residentName: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -23,6 +32,8 @@ const CreateCareNotesScreen: React.FC = () => {
     }
 
     console.log(formData);
+
+    dispatch(createCareNote(formData));
     setIsModalOpen(false);
   };
 

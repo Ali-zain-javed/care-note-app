@@ -57,6 +57,13 @@ const notesSlice = createSlice({
       })
       .addCase(loadCareNotes.rejected, (state, action) => {
         state.error = action.payload as string;
+      })
+      .addCase(createCareNote.fulfilled, (state, action) => {
+        state.notes.unshift(action.payload);
+        state.error = null;
+      })
+      .addCase(createCareNote.rejected, (state, action) => {
+        state.error = action.payload as string;
       });
   },
 });
