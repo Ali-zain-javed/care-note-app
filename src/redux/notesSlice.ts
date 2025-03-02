@@ -25,13 +25,16 @@ export const loadCareNotes = createAsyncThunk(
   'notes/loadCareNotes',
   async (_, { rejectWithValue }) => {
     try {
-      const notes = await fetchCareNotes();
-      await saveNotesToLocalDB(notes);
-      return notes.slice(0, 5);
+      const notes = await fetchCareNotes(); // Fetch from API
+      await saveNotesToLocalDB(notes); // Save to local PouchDB
+      const sortedNotes = notes?.reverse();
+
+      return sortedNotes.slice(0, 5);
     } catch (error) {
-      const offlineNotes = await getNotesFromLocalDB();
-      debugger;
-      return offlineNotes.slice(0, 5);
+      const offlineNotes = await getNotesFromLocalDB(); // Fetch from local PouchDB
+      const sortedOfflineNotes = offlineNotes?.reverse();
+
+      return sortedOfflineNotes.slice(0, 5);
     }
   },
 );
