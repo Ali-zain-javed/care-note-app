@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchCareNotes, addCareNote } from '../services/api';
+import { saveNotesToLocalDB, getNotesFromLocalDB } from '../services/localdb';
 
 export interface Note {
   id?: number;
@@ -25,9 +26,12 @@ export const loadCareNotes = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const notes = await fetchCareNotes();
-      return notes;
+      await saveNotesToLocalDB(notes);
+      return notes.slice(0, 5);
     } catch (error) {
-      return rejectWithValue('Failed to fetch notes. Using offline data.');
+      const offlineNotes = await getNotesFromLocalDB();
+      debugger;
+      return offlineNotes.slice(0, 5);
     }
   },
 );
@@ -38,6 +42,7 @@ export const createCareNote = createAsyncThunk(
   async (note: Omit<Note, 'id'>, { rejectWithValue }) => {
     try {
       const newNote = await addCareNote(note);
+      await saveNotesToLocalDB([newNote, ...(await getNotesFromLocalDB())]);
       return newNote;
     } catch (error) {
       return rejectWithValue('Failed to add note. Please try again later.');
