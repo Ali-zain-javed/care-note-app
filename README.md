@@ -12,7 +12,7 @@ This project is a **React-based Care Notes application** with offline-first supp
 
 ---
 
-## 📌 **Setup & Installation**
+## **Setup & Installation**
 
 ### 1️⃣ **Clone the Repository**
 
@@ -57,7 +57,7 @@ yarn ts-node backend/server.ts   # Runs Node app at http://localhost:3001
 
 ---
 
-## 📌 **Assumptions & Design Decisions**
+## **Assumptions & Design Decisions**
 
 - **PouchDB is only used in the frontend** for offline support.
 - **Redux only stores the last 5 notes** (most recent ones).
@@ -66,7 +66,7 @@ yarn ts-node backend/server.ts   # Runs Node app at http://localhost:3001
 
 ---
 
-## 📌 **Possible Improvements**
+## **Possible Improvements**
 
 🔹 **Real Database Integration** → Use MongoDB or PostgreSQL instead of a mock JSON file.
 🔹 **UI/UX Enhancements** → Improve design and accessibility.
