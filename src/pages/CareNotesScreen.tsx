@@ -25,16 +25,21 @@ const CreateCareNotesScreen: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!formData.residentName.trim()) {
       setErrors({ residentName: 'Resident Name is required.' });
       return;
     }
 
-    console.log(formData);
+    const resultAction = await dispatch(
+      createCareNote({ ...formData, dateTime: new Date().toISOString() }),
+    );
 
-    dispatch(createCareNote(formData));
-    setIsModalOpen(false);
+    if (createCareNote.rejected.match(resultAction)) {
+      console.log(resultAction);
+    } else {
+      setIsModalOpen(false);
+    }
   };
 
   return (
