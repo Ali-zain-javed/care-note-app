@@ -6,6 +6,7 @@ import TextArea from '../components/TextArea';
 import { createCareNote, Note } from '../redux/notesSlice';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
+import { toast } from 'react-toastify';
 
 const CreateCareNotesScreen: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -37,6 +38,7 @@ const CreateCareNotesScreen: React.FC = () => {
 
     if (createCareNote.rejected.match(resultAction)) {
       console.log(resultAction);
+      toast.error(resultAction.payload as string);
     } else {
       setIsModalOpen(false);
     }

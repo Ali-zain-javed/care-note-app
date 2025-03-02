@@ -4,6 +4,8 @@ import { loadCareNotes } from '../redux/notesSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';
 import CreateCareNotesScreen from './CareNotesScreen';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import moment from 'moment';
 
@@ -21,6 +23,7 @@ const CareNotesList: React.FC = () => {
 
   return (
     <>
+      <ToastContainer />
       <div className="max-w-5xl mx-auto mt-6 p-4 border rounded shadow-lg bg-gray-200 mt-12">
         <h2 className="text-xl font-semibold mb-4">Care Notes</h2>
         <CreateCareNotesScreen />
