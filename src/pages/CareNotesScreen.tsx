@@ -31,15 +31,13 @@ const CreateCareNotesScreen: React.FC = () => {
       setErrors({ residentName: 'Resident Name is required.' });
       return;
     }
-
     const resultAction = await dispatch(
       createCareNote({ ...formData, dateTime: new Date().toISOString() }),
     );
-
     if (createCareNote.rejected.match(resultAction)) {
-      console.log(resultAction);
       toast.error(resultAction.payload as string);
     } else {
+      toast.success('Note added successfully');
       setIsModalOpen(false);
     }
   };
@@ -50,7 +48,7 @@ const CreateCareNotesScreen: React.FC = () => {
         + Add Note
       </Button>
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <div className="border border-gray-300 bg-gray-200 p-4 rounded w-[500px] mt-[-90px] ">
+        <div className="border border-gray-300 bg-gray-200 p-4 rounded md:w-[500px] mt-[-90px] ">
           <h2 className="text-xl font-semibold mb-4 bg-gray-300 p-2">Add Care Note</h2>
           <div className="p-4 bg-white">
             <label className="block mb-2 font-semibold">Resident Name:</label>
